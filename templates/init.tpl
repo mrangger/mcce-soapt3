@@ -42,12 +42,11 @@ services:
       - --entrypoints.websecure.http.tls.domains[0].sans=traefik.${domain_name},webserver.${domain_name}
       - --api.dashboard=true
       - --providers.docker
-      - --log.level=DEBUG
-      - --providers.file.directory=/dynamic.yaml
-
+#      - --log.level=DEBUG
+      - --providers.file.filename=/dynamic.yaml
       - --certificatesresolvers.leresolver.acme.email=${email_address}
       - --certificatesresolvers.leresolver.acme.storage=./acme.json
-      - --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+#      - --certificatesresolvers.leresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
       - --certificatesresolvers.leresolver.acme.dnschallenge=true
       - --certificatesresolvers.leresolver.acme.dnschallenge.provider=infomaniak
       - --certificatesresolvers.leresolver.acme.dnschallenge.delaybeforecheck=5
@@ -111,8 +110,8 @@ http:
     nginx:
       loadBalancer:
         servers:
-          - url: "http://{node1-url}:80
-          - url: "http://{node2-url}:80
+          - url: "http://${node1-url}"
+          - url: "http://${node2-url}"
           
 EOF
 chmod 0600 $${project_dir}/acme.json

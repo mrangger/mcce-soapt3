@@ -13,9 +13,6 @@ sudo chmod +x /usr/bin/docker-compose
 project_dir="/docker"
 
 mkdir -p $${project_dir}
-touch $${project_dir}/acme.json
-chmod 0600 $${project_dir}/acme.json
-
 
 # Create docker-compose config
 cat << "EOF" > $${project_dir}/docker-compose.yaml
@@ -31,7 +28,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - index.html:/usr/share/nginx/html/index.html
+      - ./index.html:/usr/share/nginx/html/index.html
   
 EOF
 

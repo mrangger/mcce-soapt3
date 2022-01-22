@@ -15,10 +15,10 @@ variable "min_instances" {
 
 variable "max_instances" {
   type = number
-  default = 1
+  default = 5
 }
 
 variable "desired_instances" {
   type = number
-  default = 1
+  default = 2
 }
